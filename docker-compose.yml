@@ -1,0 +1,40 @@
+services:
+  # 1) Build & test image
+  pet-video:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: pet-video-classify-pipenv
+    volumes:
+      - ./videos:/app/videos
+      - ./output:/app/output
+    environment:
+      VIDEO_PATH: /app/videos/test-video-01.MOV
+      OUTPUT_PATH: /app/output/test-video-01_annotated.mp4
+# python -m pytest로 실행해서 /app(=WORKDIR)이 모듈 검색 경로가 되도록 강제
+    command:
+      - pipenv
+      - run
+      - python
+      - -m
+      - pytest
+      - --maxfail=1
+      - --disable-warnings
+      - -q
+
+  # 2) Reuse that same build for batch analysis
+  analyze:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: pet-video-classify-pipenv
+    depends_on:
+      - pet-video
+    volumes:
+      - ./videos:/app/videos
+      - ./output:/app/output
+    command:
+      - pipenv
+      - run
+      - python
+      - analyze_videos.py
