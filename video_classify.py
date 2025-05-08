@@ -25,7 +25,8 @@ def classify_and_annotate(
     cap = cv2.VideoCapture(video_path)
     if not cap.isOpened():
         raise RuntimeError(f"비디오를 열 수 없습니다: {video_path}")
-
+    
+    
     # 비디오 속성
     fps    = cap.get(cv2.CAP_PROP_FPS) or 20.0
     width  = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
@@ -36,7 +37,7 @@ def classify_and_annotate(
     # 스크린샷 저장 폴더 준비
     screenshot_dir = os.path.join(os.path.dirname(output_path), "screenshots")
     os.makedirs(screenshot_dir, exist_ok=True)
-
+    
     base_name   = os.path.splitext(os.path.basename(video_path))[0]
     frame_count = 0
 

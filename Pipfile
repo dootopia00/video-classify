@@ -4,9 +4,9 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [packages]
-tensorflow = "==2.12.0"
 opencv-python-headless = "*"
 numpy = "*"
+tensorflow = "*"
 
 [dev-packages]
 pytest = "*"
