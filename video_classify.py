@@ -54,8 +54,12 @@ def classify_and_annotate(
             x     = preprocess_input(np.expand_dims(img.astype('float32'), axis=0))
             preds = model.predict(x)
             top   = decode_predictions(preds, top=1)[0][0]
+
+            # print(f"[top]: {top}");
+            # return;
+
             label = f"{top[1]} ({top[2]*100:.1f}%)"
-            print(f"[{base_name}:Frame {frame_count}] {label}")
+            print(f"[{base_name}:Frame count: {frame_count}] / label: {label}")
 
             # 2) 프레임에 라벨 오버레이
             cv2.putText(

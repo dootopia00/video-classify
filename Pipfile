@@ -4,9 +4,14 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [packages]
-opencv-python-headless = "*"
 numpy = "*"
+tensorflow-hub = "*"
+torch = "*"
+torchvision = "*"
+transformers = "*"
 tensorflow = "*"
+pillow = "*"
+opencv-python-headless = "*"
 
 [dev-packages]
 pytest = "*"
